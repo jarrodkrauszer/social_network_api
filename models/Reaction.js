@@ -1,9 +1,9 @@
-const { Schema, model } = require('mongoose');
+const { Schema, Types } = require('mongoose');
 
 const reactionSchema = new Schema({
   reactionId: {
     type: Schema.Types.ObjectId,
-    default: new mongoose.Types.ObjectId()
+    default: new Types.ObjectId()
   },
   reactionBody: {
     type: String,
@@ -21,8 +21,13 @@ const reactionSchema = new Schema({
       return createdAt.toLocaleString();
     }
   },
+},{
+  toJSON: {
+    virtuals: true,
+    getter: true
+  },
+  id: false
 });
 
-const Reaction = model('Reaction', reactionSchema);
 
-module.exports = Reaction;
+module.exports = reactionSchema;
