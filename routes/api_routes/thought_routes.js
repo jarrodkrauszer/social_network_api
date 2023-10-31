@@ -1,14 +1,16 @@
 const router = require('express').Router();
 
-const { getAll, getOneById, create, update, deleteOneById } = require('../../controllers/thought_controller');
+const { getAll, getOneById, create, update, deleteOneById, addReaction, deleteReaction } = require('../../controllers/thought_controller');
 
 router.route('/')
   .get(getAll)
   .post(create);
 
 router.route('/:id/reactions')
-  .post()
-  .delete();
+  .post(addReaction);
+  
+router.route('/:id/reactions/:reactionId')
+  .delete(deleteReaction);  
 
 router.route('/:id')
   .get(getOneById)
