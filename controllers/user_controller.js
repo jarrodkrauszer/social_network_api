@@ -9,7 +9,7 @@ module.exports = {
 
     } catch(err) {
       console.log(err);
-      res.status(500).json({ message: 'No users found.'});
+      res.status(500).json({ message: err.message});
     }
   },
 
@@ -22,7 +22,7 @@ module.exports = {
 
     } catch(err) {
       console.log(err);
-      res.status(500).json({ message: 'No users found.'});
+      res.status(500).json({ message: err.message });
     }
   },
 
@@ -34,7 +34,7 @@ module.exports = {
 
     } catch(err) {
       console.log(err);
-      res.status(500).json({ message: 'No users found.'});
+      res.status(500).json({ message: err.message });
     }
   },
 
@@ -50,7 +50,7 @@ module.exports = {
       res.status(200).json({ message: 'User updated!', updated_user});
     } catch(err) {
       console.log(err);
-      res.status(500).json({ message: 'No users found.'});
+      res.status(500).json({ message: err.message });
     }
   },
 
@@ -66,7 +66,57 @@ module.exports = {
 
     } catch(err) {
       console.log(err);
-      res.status(500).json({ message: 'No users found.'});
+      res.status(500).json({ message: err.message });
+    }
+  },
+
+  async addFriend(req, res) {
+    try {
+      console.log(req.params.userId, req.params.friendId);
+      const user = await User.findByIdAndDelete(req.params.userId);
+
+      if (!user) {
+        return res.status(404).json({ message: 'User not found with that ID'});
+      }
+
+      const friend = await User.findByIdAndDelete(req.params.friendId);
+
+      if (!friend) {
+        return res.status(404).json({ message: 'No friend found with that ID'});
+      }
+
+      user.friends.push(req.params.friendId);
+
+      res.status(200).json({ message: 'New friend added!', user})
+
+    } catch(err) {
+      console.log(err);
+      res.status(500).json({ message: err.message });
+    }
+  },
+
+  async deleteFriend(req, res) {
+    try {
+      const user = await User.findByIdAndDelete(req.params.userId);
+
+      if (!user) {
+        return res.status(404).json({ message: 'User not found with that ID'});
+      }
+
+      const friend = await User.findByIdAndDelete(req.params.friendId);
+
+      if (!friend) {
+        return res.status(404).json({ message: 'No friend found with that ID'});
+      }
+
+      user.friends.pull(req.params.friendId);
+      user.save();
+
+      res.status(200).json({ message: 'Friend removed from list!', user})
+
+    } catch(err) {
+      console.log(err);
+      res.status(500).json({ message: err.message });
     }
   }
 };

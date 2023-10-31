@@ -11,7 +11,7 @@ const userSchema = new Schema({
     type: String,
     unique: true,
     required: true,
-    match: [/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/, 'Not a valid email!']
+    match: [/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/gi, 'Not a valid email!']
   },
   thoughts: [{ 
     type: Schema.Types.ObjectId,
