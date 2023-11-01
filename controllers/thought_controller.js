@@ -73,7 +73,7 @@ module.exports = {
         $set: {
           ...req.body
         }
-      })
+      }, { new: true })
 
       res.status(200).json({ message: 'User updated!', updated_thought });
 
