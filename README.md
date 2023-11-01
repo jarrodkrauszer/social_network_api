@@ -16,9 +16,9 @@ To run this app you type npm start on the command line.
 
 Link to my github profile: [jarrodkrauszer](https://github.com/jarrodkrauszer)
 
-Here is a link to the project: [Socail Network API](https://github.com/jarrodkrauszer/social_network_api)
+Here is a link to the project: [Social Network API](https://github.com/jarrodkrauszer/social_network_api)
 
-Here is a link to the walkthrough video: [Socail Network API Walkthrough Video](https://youtu.be/dKHAorEFqbk)
+Here is a link to the walkthrough video: [Social Network API Walkthrough Video](https://youtu.be/dKHAorEFqbk)
   
 
 
